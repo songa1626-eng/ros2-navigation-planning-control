@@ -1,0 +1,22 @@
+# ROS2
+build/
+install/
+log/
+
+# CMake
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+
+# C++
+*.o
+*.so
+*.a
+*.out
+
+# VS Code
+.vscode/
+
+# Temporary files
+*.swp
+*~
