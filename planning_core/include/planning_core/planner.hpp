@@ -12,17 +12,20 @@ using GridPath = std::vector<GridIndex>;
 
 class Planner {
 public:
-    std::string name() const;
+    virtual ~Planner() = default;
+
+    /** 返回具体规划器的名称。 */
+    virtual std::string name() const = 0;
 
     /**
-     * @brief 在四邻域栅格地图上搜索一条最短路径。
+     * @brief 在栅格地图上搜索一条从 start 到 goal 的路径。
      *
-     * 当前实现使用 Dijkstra：每次移动的代价为 1，h_cost 固定为 0。
+     * 具体的搜索策略由派生类决定，例如 Dijkstra 或 A*。
      * @return 找到路径时返回从 start 到 goal 的栅格序列，否则返回空值。
      */
-    std::optional<GridPath> plan(const GridMap& map,
-                                 GridIndex start,
-                                 GridIndex goal) const;
+    virtual std::optional<GridPath> plan(const GridMap& map,
+                                         GridIndex start,
+                                         GridIndex goal) const = 0;
 };
 
 }  // namespace planning_core

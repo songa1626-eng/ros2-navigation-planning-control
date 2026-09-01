@@ -8,7 +8,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_library(planning_core
     src/grid_map.cpp
-    src/planner.cpp
+    src/dijkstra_planner.cpp
+    src/a_star_planner.cpp
 )
 
 target_include_directories(planning_core

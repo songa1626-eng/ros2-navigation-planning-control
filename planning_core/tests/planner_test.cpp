@@ -1,6 +1,8 @@
 #include <cassert>
 #include <cmath>
 
+#include "planning_core/a_star_planner.hpp"
+#include "planning_core/dijkstra_planner.hpp"
 #include "planning_core/GridMap.hpp"
 #include "planning_core/planner.hpp"
 
@@ -28,11 +30,7 @@ void assertValidPath(const planning_core::GridMap& map,
     }
 }
 
-}  // namespace
-
-int main() {
-    const planning_core::Planner planner;
-
+void runPlannerTests(const planning_core::Planner& planner) {
     planning_core::GridMap map(5, 5, 1.0);
     const planning_core::GridIndex start{0, 0};
     const planning_core::GridIndex goal{4, 0};
@@ -56,6 +54,16 @@ int main() {
 
     assert(!planner.plan(blocked_map, {0, 0}, {1, 1}).has_value());
     assert(!planner.plan(map, {-1, 0}, goal).has_value());
+}
+
+}  // namespace
+
+int main() {
+    const planning_core::DijkstraPlanner dijkstra;
+    const planning_core::AStarPlanner a_star;
+
+    runPlannerTests(dijkstra);
+    runPlannerTests(a_star);
 
     return 0;
 }

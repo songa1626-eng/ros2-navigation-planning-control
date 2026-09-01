@@ -7,7 +7,7 @@
 - [ ] ROS2 development environment
 - [ ] TurtleBot3 simulation
 - [x] Dijkstra planner
-- [ ] A* planner
+- [x] A* planner
 - [ ] Theta* planner
 - [ ] Nav2 planner plugin
 - [ ] Planning benchmark
