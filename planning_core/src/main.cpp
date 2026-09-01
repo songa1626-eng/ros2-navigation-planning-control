@@ -9,14 +9,24 @@ int main() {
     planning_core::GridMap map(10, 8, 0.5);
     map.setCell({3, 2}, planning_core::CellState::Occupied);
 
-    const planning_core::Node start_node{{1, 2}, 0.0, 0.0};
+    const planning_core::GridIndex start{1, 2};
+    const planning_core::GridIndex goal{8, 6};
+    const auto path = planner.plan(map, start, goal);
 
     std::cout << "Planner: " << planner.name() << '\n'
               << "Map: " << map.width() << " x " << map.height()
-              << " cells\n"
-              << "Start node: (" << start_node.index.x << ", "
-              << start_node.index.y << ")\n"
-              << "Cell (3, 2) is free: "
-              << std::boolalpha << map.isFree({3, 2}) << '\n';
+              << " cells\n";
+
+    if (!path.has_value()) {
+        std::cout << "No path found\n";
+        return 1;
+    }
+
+    std::cout << "Path length: " << path->size() << " cells\n"
+              << "Path: ";
+    for (const planning_core::GridIndex& index : *path) {
+        std::cout << "(" << index.x << ", " << index.y << ") ";
+    }
+    std::cout << '\n';
     return 0;
 }

@@ -6,7 +6,7 @@
 
 - [ ] ROS2 development environment
 - [ ] TurtleBot3 simulation
-- [ ] Dijkstra planner
+- [x] Dijkstra planner
 - [ ] A* planner
 - [ ] Theta* planner
 - [ ] Nav2 planner plugin

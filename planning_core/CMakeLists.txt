@@ -24,3 +24,18 @@ target_link_libraries(planning_demo
     PRIVATE
         planning_core
 )
+
+include(CTest)
+
+if(BUILD_TESTING)
+    add_executable(planning_core_test
+        tests/planner_test.cpp
+    )
+
+    target_link_libraries(planning_core_test
+        PRIVATE
+            planning_core
+    )
+
+    add_test(NAME planning_core_test COMMAND planning_core_test)
+endif()
