@@ -6,13 +6,15 @@
 
 namespace planning_core {
 
-struct Node {
-    GridIndex index{};
-    double g_cost{0.0};
+struct Node 
+{
+    GridIndex index{}; //x = 0；y = 0
+    double g_cost{0.0}; //花括号赋值，更加精确，例如int x{3.14};直接报错
     double h_cost{0.0};
     std::optional<GridIndex> parent{};
 
-    double fCost() const noexcept {
+    double fCost() const noexcept 
+    {
         return g_cost + h_cost;
     }
 };
