@@ -9,9 +9,10 @@ class DijkstraPlanner final : public Planner {
 public:
     std::string name() const override;
 
-    std::optional<GridPath> plan(const GridMap& map,
-                                 GridIndex start,
-                                 GridIndex goal) const override;
+    std::optional<GridPath> planWithStats(const GridMap& map,
+                                          GridIndex start,
+                                          GridIndex goal,
+                                          PlannerStats* stats) const override;
 };
 
 }  // namespace planning_core

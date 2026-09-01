@@ -9,11 +9,13 @@ std::string AStarPlanner::name() const
     return "A*";
 }
 
-std::optional<GridPath> AStarPlanner::plan(const GridMap& map,
-                                           GridIndex start,
-                                           GridIndex goal) const
+std::optional<GridPath> AStarPlanner::planWithStats(const GridMap& map,
+                                                    GridIndex start,
+                                                    GridIndex goal,
+                                                    PlannerStats* stats) const
 {
-    return detail::runBestFirstSearch(map, start, goal, detail::manhattanHeuristic);
+    return detail::runBestFirstSearch(
+        map, start, goal, detail::manhattanHeuristic, stats);
 }
 
 }  // namespace planning_core

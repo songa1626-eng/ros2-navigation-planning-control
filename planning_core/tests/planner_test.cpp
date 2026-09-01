@@ -31,14 +31,23 @@ void assertValidPath(const planning_core::GridMap& map,
 }
 
 void runPlannerTests(const planning_core::Planner& planner) {
+    assert(!planner.name().empty());
+
     planning_core::GridMap map(5, 5, 1.0);
     const planning_core::GridIndex start{0, 0};
     const planning_core::GridIndex goal{4, 0};
 
-    const auto direct_path = planner.plan(map, start, goal);
+    planning_core::PlannerStats stats;
+    const auto direct_path = planner.planWithStats(map, start, goal, &stats);
     assert(direct_path.has_value());
     assertValidPath(map, *direct_path, start, goal);
     assert(direct_path->size() == 5);
+    assert(stats.expanded_nodes > 0);
+
+    const auto same_cell_path = planner.plan(map, start, start);
+    assert(same_cell_path.has_value());
+    assert(same_cell_path->size() == 1);
+    assert((*same_cell_path)[0] == start);
 
     map.setCell({2, 0}, planning_core::CellState::Occupied);
     const auto detour_path = planner.plan(map, start, goal);

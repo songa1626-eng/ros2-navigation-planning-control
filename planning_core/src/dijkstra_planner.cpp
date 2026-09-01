@@ -9,11 +9,13 @@ std::string DijkstraPlanner::name() const
     return "Dijkstra";
 }
 
-std::optional<GridPath> DijkstraPlanner::plan(const GridMap& map,
-                                              GridIndex start,
-                                              GridIndex goal) const
+std::optional<GridPath> DijkstraPlanner::planWithStats(const GridMap& map,
+                                                       GridIndex start,
+                                                       GridIndex goal,
+                                                       PlannerStats* stats) const
 {
-    return detail::runBestFirstSearch(map, start, goal, detail::zeroHeuristic);
+    return detail::runBestFirstSearch(
+        map, start, goal, detail::zeroHeuristic, stats);
 }
 
 }  // namespace planning_core

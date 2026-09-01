@@ -55,8 +55,13 @@ inline std::optional<GridPath> runBestFirstSearch(
     const GridMap& map,
     GridIndex start,
     GridIndex goal,
-    Heuristic heuristic)
+    Heuristic heuristic,
+    PlannerStats* stats)
 {
+    if (stats != nullptr) {
+        *stats = PlannerStats{};
+    }
+
     if (!map.isInBounds(start) || !map.isInBounds(goal) ||
         !map.isFree(start) || !map.isFree(goal)) {
         return std::nullopt;
@@ -86,6 +91,10 @@ inline std::optional<GridPath> runBestFirstSearch(
         const auto known_cost = best_cost.find(current.index);
         if (known_cost == best_cost.end() || current.g_cost > known_cost->second) {
             continue;
+        }
+
+        if (stats != nullptr) {
+            ++stats->expanded_nodes;
         }
 
         if (current.index == goal) {

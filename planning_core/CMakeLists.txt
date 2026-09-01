@@ -26,6 +26,15 @@ target_link_libraries(planning_demo
         planning_core
 )
 
+add_executable(planning_benchmark
+    ../benchmark/planner_benchmark.cpp
+)
+
+target_link_libraries(planning_benchmark
+    PRIVATE
+        planning_core
+)
+
 include(CTest)
 
 if(BUILD_TESTING)
